@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="SupremTournamentsProgram.Vistas.Gestor.TorneosIndividualesUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SupremTournamentsProgram.Vistas.Gestor"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:SupremTournamentsProgram.Convertidores"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <local1:LongDateToString x:Key="longDateToString" />
+
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=RefrescarCommand}" Key="F5"/>
+        <KeyBinding Command="{Binding Path=EliminarCommand}" Key="Delete"/>
+        <KeyBinding Command="{Binding Path=AbrirDialogoCrearTorneoIndiviualCommand}" Key="N" Modifiers="Ctrl"/>
+    </UserControl.InputBindings>
+    <Grid Background="{StaticResource BackgraundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+
+        <DataGrid Grid.Row="0"
+                  Foreground="{StaticResource TextColor}"
+          CanUserAddRows="False"
+          AutoGenerateColumns="False"
+          SelectedItem="{Binding Path=TorneosIndividualesSelecionado, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Path=ListaTorneosIndividuales, UpdateSourceTrigger=PropertyChanged}"
+          SelectionMode="Extended"
+          SelectionUnit="FullRow"
+          Template="{StaticResource DataGridControlTemplate}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Imagen" Width="170">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Width="150" Height="150" Source="{Binding Path=fotoUrlTorneoIndividual, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Nombre" Width="200" SortMemberPath="nombreTorneoIndividual" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=nombreTorneoIndividual}" TextWrapping="Wrap" TextAlignment="Justify"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Descripcion corta" Width="200" SortMemberPath="descripcionCorta" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=descripcionCorta}" TextWrapping="Wrap" TextAlignment="Justify"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Descripcion Completa" Width="250" SortMemberPath="descripcionCompleta" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=descripcionCompleta}" TextWrapping="Wrap" TextAlignment="Justify"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Fecha finalizacion" Width="140" SortMemberPath="fechaFinalizacion" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=fechaFinalizacion, Converter={StaticResource longDateToString}}" TextWrapping="Wrap" TextAlignment="Justify"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Fecha inicio" Width="120" SortMemberPath="fechaInicio" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=fechaInicio, Converter={StaticResource longDateToString}}" TextWrapping="Wrap" TextAlignment="Justify"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Menores permitidos" Width="170" SortMemberPath="menoresEdad" CanUserSort="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton IsChecked="{Binding Path=menoresEdad, UpdateSourceTrigger=PropertyChanged}"
+                              Style="{StaticResource MaterialDesignActionToggleButton}"   
+                              Content="{materialDesign:PackIcon Kind=CloseCircle}"
+                              materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=CheckCircle}"
+                              IsEnabled="False"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <UniformGrid Grid.Row="1" Rows="1">
+            <Button Command="{Binding Path=AbrirDialogoCrearTorneoIndiviualCommand}" Style="{StaticResource AcceptButtonStyle}">Crear Torneo</Button>
+            <Button Command="{Binding Path=RefrescarCommand}">Refrescar Torneo</Button>
+            <Button Command="{Binding Path=EliminarCommand}" Style="{StaticResource CancelButtonStyle}">Eliminar Torneo</Button>
+        </UniformGrid>
+    </Grid>
+</UserControl>

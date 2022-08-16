@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32228.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupremTournamentsProgram", "SupremTournamentsProgram\SupremTournamentsProgram.csproj", "{EC7A9B76-B29F-4E85-A556-BB43D2A1676C}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SupremTournament", "SupremTournament\SupremTournament.vdproj", "{88FE7FBB-4235-43B1-A96F-D92134E52558}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EC7A9B76-B29F-4E85-A556-BB43D2A1676C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC7A9B76-B29F-4E85-A556-BB43D2A1676C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC7A9B76-B29F-4E85-A556-BB43D2A1676C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC7A9B76-B29F-4E85-A556-BB43D2A1676C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FE7FBB-4235-43B1-A96F-D92134E52558}.Debug|Any CPU.ActiveCfg = Debug
+		{88FE7FBB-4235-43B1-A96F-D92134E52558}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {99E65D9C-0496-4CEF-8405-19F2CFFFF99D}
+	EndGlobalSection
+EndGlobal

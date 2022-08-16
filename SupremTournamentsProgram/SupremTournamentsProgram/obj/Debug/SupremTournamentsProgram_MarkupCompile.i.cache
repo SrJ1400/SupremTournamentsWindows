@@ -1,0 +1,20 @@
+﻿SupremTournamentsProgram
+
+
+winexe
+C#
+.cs
+H:\cursos\DAM\2 Ano\Asignaturas\Proyecto\Programas\SupremTournamentsWindows\SupremTournamentsProgram\SupremTournamentsProgram\obj\Debug\
+SupremTournamentsProgram
+none
+false
+DEBUG;TRACE
+H:\cursos\DAM\2 Ano\Asignaturas\Proyecto\Programas\SupremTournamentsWindows\SupremTournamentsProgram\SupremTournamentsProgram\App.xaml
+241582843055
+
+681571588991
+142-627433231
+MainWindow.xaml;Vistas\Gestor\DialogoAnadirSolicitudContinua.xaml;Vistas\Gestor\DialogoCrearSolicitudAcceptada.xaml;Vistas\Gestor\DialogoCrearSolicitudContinua.xaml;Vistas\Gestor\DialogoCrearCombate.xaml;Vistas\Gestor\DialogoCrearTorneoInidvidual.xaml;Vistas\Gestor\CombatesUC.xaml;Vistas\Gestor\EditarDatosTorneoInidvidual.xaml;Vistas\Gestor\EditarSolicitantesAcceptadosUC.xaml;Vistas\Gestor\EditarSolicitudesSolicitadasUC.xaml;Vistas\Gestor\MainEditarTorneo.xaml;Vistas\Gestor\MainGestor.xaml;Vistas\Gestor\SolicitudesContinuasUC.xaml;Vistas\Gestor\TorneoNoSelecionadoErrorUC.xaml;Vistas\Gestor\TorneosIndividualesUC.xaml;Vistas\SinLogin\DefaultUC.xaml;Vistas\SinLogin\DialogoSolicitante.xaml;Vistas\SinLogin\GeneralTorneo.xaml;Vistas\SinLogin\InfoCombates.xaml;Vistas\SinLogin\InfoSolicitantes.xaml;Vistas\SinLogin\InfoTorneoIndividual.xaml;Vistas\SinLogin\Loguin.xaml;Vistas\SinLogin\MainInfoTorneoIndividual.xaml;Vistas\SinLogin\Registrarse.xaml;
+
+True
+

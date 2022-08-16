@@ -1,0 +1,85 @@
+﻿<Window x:Class="SupremTournamentsProgram.Vistas.SinLogin.FormularioSolicitanteASolicitar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupremTournamentsProgram.Vistas.SinLogin" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:local1="clr-namespace:SupremTournamentsProgram.Convertidores"
+        mc:Ignorable="d"
+        Title="FormularioSolicitanteASolicitar" Height="450" Width="800"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
+    <Window.Resources>
+
+        <local1:LongDateToDateTime x:Key="longDateToDateTime" />
+
+        <Style TargetType="Button" BasedOn="{StaticResource AcceptButtonStyle}" x:Key="ButtonValidationStyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=NombreTextBox, Path=Text}" Value="">
+                    <Setter Property="Button.IsEnabled" Value="false"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=DatosTextBox, Path=Text}" Value="">
+                    <Setter Property="Button.IsEnabled" Value="false"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=DatosPublicosTextBox, Path=Text}" Value="">
+                    <Setter Property="Button.IsEnabled" Value="false"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
+        
+    </Window.Resources>
+        <Grid Background="{StaticResource BackgraundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+            
+        <Border Background="{StaticResource CardviewColor}" Grid.Column="0" Grid.RowSpan="2" Margin="20" CornerRadius="5">
+            <Image Source="{Binding Path=Imagen, UpdateSourceTrigger=PropertyChanged}" Margin="20" MouseLeftButtonUp="Image_MouseLeftButtonUp" />
+        </Border>
+
+        <StackPanel Margin="10" Grid.Column="1">
+            <TextBox 
+            x:Name="NombreTextBox"
+            Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Nombre"
+            ToolTip="Tu nombre"      
+            MaxLength="69"
+            Text="{Binding Path=Solicitud.nombreSolicitudes, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <TextBox
+            x:Name="DatosTextBox"
+            Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Datos"
+            ToolTip="Datos que solo puede ver el Gestor"
+            MaxLength="200"
+            Text="{Binding Path=Solicitud.datos, UpdateSourceTrigger=PropertyChanged}"/>
+            
+            <TextBox
+            x:Name="DatosPublicosTextBox"
+            Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Datos públicos"
+            ToolTip="Datos que podra ver cualquier perosona"
+            Text="{Binding Path=Solicitud.datosPublicos, UpdateSourceTrigger=PropertyChanged}"
+            MaxLength="128"/>
+            <DatePicker Margin="10" Style="{StaticResource DatePickerStyle}" SelectedDate="{Binding Path=Solicitud.fechaNacimiento, Converter={StaticResource longDateToDateTime}}" materialDesign:HintAssist.Hint="Fecha de nacimiento"/>
+        </StackPanel>
+            
+        <UniformGrid Rows="1" Grid.Row="1" Grid.Column="1">
+            <Button Click="EnviarButton_Click" Style="{StaticResource ButtonValidationStyle}" IsDefault="True">Enviar Solicitud</Button>
+            <Button  Style="{StaticResource CancelButtonStyle}" IsCancel="True" Click="Cancelar_Click">Cancelar</Button>
+        </UniformGrid>
+
+    </Grid>
+</Window>

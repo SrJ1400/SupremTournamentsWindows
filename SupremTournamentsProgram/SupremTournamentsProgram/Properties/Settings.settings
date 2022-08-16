@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SupremTournamentsProgram.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="cadenaConexion" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">CadenaConexionBlob</Value>
+    </Setting>
+    <Setting Name="nombreContenedorBlobs" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">imagenes</Value>
+    </Setting>
+    <Setting Name="baseURL" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:8080/api/supremtournaments</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

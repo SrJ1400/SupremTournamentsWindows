@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="SupremTournamentsProgram.Vistas.Gestor.EditarDatosTorneoInidvidual"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SupremTournamentsProgram.Vistas.Gestor"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:local1="clr-namespace:SupremTournamentsProgram.Convertidores"
+             d:DesignHeight="600" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <local1:LongDateToDateTime x:Key="longDateToDateTime" />
+    </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding Path=EditarTorneoCommand}" Key="S" Modifiers="Ctrl"/>
+    </UserControl.InputBindings>
+    <Grid Background="{StaticResource BackgraundColor}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="{StaticResource CardviewColor}" Grid.Column="0" Grid.RowSpan="2" Margin="20" CornerRadius="5">
+            <Image Source="{Binding Path=Imagen, UpdateSourceTrigger=PropertyChanged}" Margin="20" MouseLeftButtonUp="Image_MouseLeftButtonUp"  />
+        </Border>
+
+        <StackPanel Margin="10" Grid.Column="1">
+            <TextBox Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Nombre Torneo Individual"
+            ToolTip="Nombre del Torneo Individual"      
+            MaxLength="69"
+            Text="{Binding Path=TorneoIndividualAEditar.nombreTorneoIndividual, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Descripción Corta"
+            ToolTip="La descripción corta sera visible desde fuera sin entrar en los detalles del torneo"      
+            MaxLength="128"
+            Text="{Binding Path=TorneoIndividualAEditar.descripcionCorta, UpdateSourceTrigger=PropertyChanged}"
+            />
+
+            <TextBox Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Descripción Completa"
+            ToolTip="La descripción corta sera visible al entrar en los detalles del torneo"      
+            MaxLength="200"
+            Text="{Binding Path=TorneoIndividualAEditar.descripcionCompleta, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="NoWrap"/>
+
+            <StackPanel Orientation="Horizontal" Margin="3">
+                <TextBlock Text="Nivel dificultad:" Margin="3"/>
+                <materialDesign:RatingBar
+              x:Name="CustomRatingBar"
+              Max="10"
+              Value="{Binding Path=TorneoIndividualAEditar.nivel, UpdateSourceTrigger=PropertyChanged}"
+                    
+              Orientation="Horizontal"
+              ToolTip="Nivel de dificultad" ValueChanged="CustomRatingBar_ValueChanged">
+                    <materialDesign:RatingBar.ValueItemTemplate>
+                        <DataTemplate DataType="system:Int32">
+                            <Grid>
+                                <materialDesign:PackIcon
+                                      Kind="Skull"
+                                      Height="20"
+                                      Width="20" />
+                                <TextBlock
+                                      Text="{Binding}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      FontSize="8"
+                                      Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                            </Grid>
+                        </DataTemplate>
+                    </materialDesign:RatingBar.ValueItemTemplate>
+                </materialDesign:RatingBar>
+            </StackPanel>
+
+
+
+            <DatePicker Foreground="{StaticResource TextColor}" materialDesign:HintAssist.Hint="Fecha inicio" Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" BorderBrush="#726EFF" SelectedDate="{Binding Path=TorneoIndividualAEditar.fechaInicio, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource longDateToDateTime}}"/>
+            <DatePicker Foreground="{StaticResource TextColor}" materialDesign:HintAssist.Hint="Fecha finalización" Margin="10" Style="{StaticResource MaterialDesignOutlinedDatePicker}" BorderBrush="#726EFF" SelectedDate="{Binding Path=TorneoIndividualAEditar.fechaFinalizacion, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource longDateToDateTime}}"/>
+
+            <TextBox Style="{StaticResource TextBoxStyle}"
+            materialDesign:HintAssist.Hint="Número de participantes maximos"
+            ToolTip="Número de participantes que podran participar en este torneo"
+            Text="{Binding Path=TorneoIndividualAEditar.solicitudesMaximos, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Menores de edad permitidos" Margin="10"/>
+                <ToggleButton IsChecked="{Binding Path=TorneoIndividualAEditar.menoresEdad, UpdateSourceTrigger=PropertyChanged}" 
+                              Style="{StaticResource MaterialDesignActionToggleButton}"   
+                              Content="{materialDesign:PackIcon Kind=CloseCircle}"
+                              materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=CheckCircle}" />
+            </StackPanel>
+
+        </StackPanel>
+        <Button Grid.Column="1" VerticalAlignment="Bottom" Command="{Binding Path=EditarTorneoCommand}" Style="{StaticResource AcceptButtonStyle}">Editar Torneo individual</Button>
+
+    </Grid>
+</UserControl>

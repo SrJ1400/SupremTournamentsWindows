@@ -1,0 +1,97 @@
+﻿<Window x:Class="SupremTournamentsProgram.Vistas.Gestor.AnadirSolicitudContinua"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SupremTournamentsProgram.Vistas.Gestor"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local1="clr-namespace:SupremTournamentsProgram.Convertidores"
+        Title="Elige un participante continuo" Height="700" Width="1300"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True">
+    <Window.Resources>
+        <local1:LongDateToDateTime x:Key="longDateToDateTime" />
+    </Window.Resources>
+    <Grid Background="{StaticResource BackgraundColor}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0"
+          CanUserAddRows="False"
+          AutoGenerateColumns="False"
+          SelectedItem="{Binding Path=SolicitudContinuaSelecionada, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Path=SolicitudesContinuas, UpdateSourceTrigger=PropertyChanged}"
+          SelectionMode="Extended"
+          SelectionUnit="FullRow"
+          Template="{StaticResource DataGridControlTemplate}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Imagen" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Path=fotoUrlSolicitudesContinuas, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Nombre" Width="200" CanUserSort="True" SortMemberPath="nombreSolicitudesContinuas">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                            ToolTip="Nombre solicitud continua"      
+                            Text="{Binding Path=nombreSolicitudesContinuas, UpdateSourceTrigger=PropertyChanged}"
+                            TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Fecha nacimiento" Width="200" CanUserSort="True" SortMemberPath="fechaNacimiento">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker IsEnabled="False" Foreground="#5AFFE7" Margin="10" Style="{StaticResource DatePickerStyle}" SelectedDate="{Binding Path=fechaNacimiento, UpdateSourceTrigger=PropertyChanged ,Converter={StaticResource longDateToDateTime}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Datos" Width="300" CanUserSort="True" SortMemberPath="datos">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                ToolTip="Datos que solo puede ver el Gestor"
+                                Text="{Binding Path=datos, UpdateSourceTrigger=PropertyChanged}"
+                                TextAlignment="Justify"
+                                TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Datos públicos" Width="400" CanUserSort="True" SortMemberPath="datosPublicos">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                materialDesign:HintAssist.Hint="Datos publicos"
+                                ToolTip="Datos que puede ver todo el mundo"
+                                Text="{Binding Path=datosPublicos, UpdateSourceTrigger=PropertyChanged}"
+                                TextAlignment="Justify"
+                                TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+        <UniformGrid Rows="1"  Grid.Row="1" >
+            <Button Click="Acceptar_Click" Style="{StaticResource AcceptButtonStyle}">Elegir este participante continuo</Button>
+            <Button Style="{StaticResource CancelButtonStyle}" Click="Cancelar_Click">Cancelar</Button>
+        </UniformGrid>
+    </Grid>
+</Window>

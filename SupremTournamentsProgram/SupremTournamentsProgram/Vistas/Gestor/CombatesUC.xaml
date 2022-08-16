@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="SupremTournamentsProgram.Vistas.Gestor.EditarCombatesUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SupremTournamentsProgram.Vistas.Gestor"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:local1="clr-namespace:SupremTournamentsProgram.Convertidores"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local1:BoolToVisibility x:Key="boolToVisibility" />
+
+        <Style TargetType="Grid" x:Key="ListaGrid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Editando}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        <Style TargetType="Grid" x:Key="EditarGrid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Editando}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    
+    </UserControl.Resources>
+    <Grid>
+        <Grid Background="{StaticResource BackgraundColor}" Style="{StaticResource ListaGrid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0"
+          CanUserAddRows="False"
+          AutoGenerateColumns="False"                  
+          SelectedItem="{Binding Path=CombatesIndividualesSelecionado, UpdateSourceTrigger=PropertyChanged}"
+          ItemsSource="{Binding Path=CombatesIndividuales, UpdateSourceTrigger=PropertyChanged}"
+          SelectionMode="Extended"
+          SelectionUnit="FullRow"
+          Template="{StaticResource DataGridControlTemplate}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Contrincante 1" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+
+                            <materialDesign:Chip HorizontalAlignment="Center" Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                                <materialDesign:Chip.Icon>
+                                    <Image Source="{Binding Path=idSolicitud1.fotoUrlSolicitudes}" Stretch="Fill"/>
+                                </materialDesign:Chip.Icon>
+                                <TextBlock Text="{Binding Path=idSolicitud1.nombreSolicitudes}"/>
+                            </materialDesign:Chip>
+
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Contrincante 2" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <materialDesign:Chip  HorizontalAlignment="Center" Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                                <materialDesign:Chip.Icon>
+                                    <Image Source="{Binding Path=idSolicitud2.fotoUrlSolicitudes}" Stretch="Fill"/>
+                                </materialDesign:Chip.Icon>
+                                <TextBlock Text="{Binding Path=idSolicitud2.nombreSolicitudes}"/>
+                            </materialDesign:Chip>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn Header="Ganador" Width="300">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <materialDesign:Chip Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                                <materialDesign:Chip.Icon>
+                                    <Image Source="{Binding Path=idSolicitudGanador.fotoUrlSolicitudes}" Stretch="Fill"/>
+                                </materialDesign:Chip.Icon>
+                                <TextBlock Text="{Binding Path=idSolicitudGanador.nombreSolicitudes}"/>
+                            </materialDesign:Chip>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+              
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="{Binding Path=AbrirCrearCombateCommand}" Style="{StaticResource AcceptButtonStyle}">Crear Combate</Button>
+            <Button Grid.Column="1" Command="{Binding Path=CrearCombatesAleatoriosCommand}">Crear Combates aleatorios</Button>
+            <Button Grid.Column="2" Command="{Binding Path=AbrirEditarCombateCommand}">Editar Selecionado</Button>
+            <Button Grid.Column="3" Command="{Binding Path=RefrecarCommand}">Refrescar</Button>
+            <Button Grid.Column="4" Command="{Binding Path=EliminarCommand}" Style="{StaticResource CancelButtonStyle}">Eliminar Selecionado</Button>
+        </Grid>
+    </Grid>
+        
+        
+        
+        <Grid Background="{StaticResource BackgraundColor}" Style="{StaticResource EditarGrid}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Contrincante 1</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">Contrincante 2</TextBlock>
+            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center">Ganador</TextBlock>
+
+            <!--Lista de Solicitantes 1-->
+            <ListBox ItemsSource="{Binding Path=ListaDeSolicitantes}"
+                             SelectedItem="{Binding Path=CombatesIndividualesSelecionado.idSolicitud1,UpdateSourceTrigger=PropertyChanged}"                 
+                             Grid.Column="0"
+                             Grid.Row="1"
+                             Background="{StaticResource CardviewColor}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Chip HorizontalAlignment="Center" Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                            <materialDesign:Chip.Icon>
+                                <Image Source="{Binding Path=fotoUrlSolicitudes}" Stretch="Fill"/>
+                            </materialDesign:Chip.Icon>
+                            <TextBlock Text="{Binding Path=nombreSolicitudes}"/>
+                        </materialDesign:Chip>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <!--Lista de Solicitantes 2-->
+            <ListBox ItemsSource="{Binding Path=ListaDeSolicitantes}"
+                 SelectedItem="{Binding Path=CombatesIndividualesSelecionado.idSolicitud2,UpdateSourceTrigger=PropertyChanged}"
+                             Grid.Column="1"
+                             Grid.Row="1"
+                             Background="{StaticResource CardviewColor}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Chip HorizontalAlignment="Center" Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                            <materialDesign:Chip.Icon>
+                                <Image Source="{Binding Path=fotoUrlSolicitudes}" Stretch="Fill"/>
+                            </materialDesign:Chip.Icon>
+                            <TextBlock Text="{Binding Path=nombreSolicitudes}"/>
+                        </materialDesign:Chip>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+
+            <!--Lista de Solicitantes para elegir el ganador-->
+            <ListBox ItemsSource="{Binding Path=SolicitudesGanadoras, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding Path=CombatesIndividualesSelecionado.idSolicitudGanador,UpdateSourceTrigger=PropertyChanged}"
+                             Grid.Column="2"
+                             Grid.Row="1"
+                             Background="{StaticResource CardviewColor}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"></StackPanel>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <materialDesign:Chip HorizontalAlignment="Center" Background="{StaticResource BackgraundColor}" Foreground="{StaticResource TextColor}" IsEnabled="False">
+                            <materialDesign:Chip.Icon>
+                                <Image Source="{Binding Path=fotoUrlSolicitudes}" Stretch="Fill"/>
+                            </materialDesign:Chip.Icon>
+                            <TextBlock Text="{Binding Path=nombreSolicitudes}"/>
+                        </materialDesign:Chip>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <UniformGrid Grid.Row="2" Grid.ColumnSpan="3"  Rows="1">
+                <Button Command="{Binding Path=GuardarCambiosCommand}" Style="{StaticResource AcceptButtonStyle}" >Guardar cambio</Button>
+                <Button Command="{Binding Path=CancelarCommand}" Style="{StaticResource CancelButtonStyle}" IsCancel="True" >Cancelar</Button>
+            </UniformGrid>
+
+        </Grid>
+    </Grid>
+</UserControl>
